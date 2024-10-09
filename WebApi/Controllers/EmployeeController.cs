@@ -30,8 +30,7 @@ namespace WebApi.Controllers
             try
             {
                 var items = _employeeService.GetAllEmployee();
-                throw new Exception();
-                //return await Task.Run(() => _mapper.Map<IEnumerable<EmployeeDto>>(items));
+                return await Task.Run(() => _mapper.Map<IEnumerable<EmployeeDto>>(items));
             }
             catch (Exception ex)
             {
