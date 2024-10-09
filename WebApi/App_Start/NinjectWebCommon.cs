@@ -14,6 +14,7 @@ namespace WebApi.App_Start
     using System.Web.Http;
     using BusinessLayer.Model.Interfaces;
     using BusinessLayer.Services;
+    using DataAccessLayer.Model.Models;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
@@ -83,8 +84,11 @@ namespace WebApi.App_Start
                 return config.CreateMapper();
             }).InSingletonScope();
             kernel.Bind<ICompanyService>().To<CompanyService>();
+            kernel.Bind<IEmployeeService>().To<EmployeeService>();
             kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
-            kernel.Bind(typeof(IDbWrapper<>)).To(typeof(InMemoryDatabase<>));
+            kernel.Bind<IEmployeeRepository>().To<EmployeeRepository>();
+            kernel.Bind(typeof(IDbWrapper<Company>)).To(typeof(InMemoryDatabase<Company>)).InSingletonScope();
+            kernel.Bind(typeof(IDbWrapper<Employee>)).To(typeof(InMemoryDatabase<Employee>)).InSingletonScope();
         }
     }
 }

@@ -7,11 +7,16 @@ namespace DataAccessLayer.Repositories
 {
     public class CompanyRepository : ICompanyRepository
     {
-	    private readonly IDbWrapper<Company> _companyDbWrapper;
+        private readonly IDbWrapper<Company> _companyDbWrapper;
 
-	    public CompanyRepository(IDbWrapper<Company> companyDbWrapper)
-	    {
-		    _companyDbWrapper = companyDbWrapper;
+        public CompanyRepository(IDbWrapper<Company> companyDbWrapper)
+        {
+            _companyDbWrapper = companyDbWrapper;
+        }
+
+        public bool DeleteCompany(string companyCode)
+        {
+            throw new System.NotImplementedException();
         }
 
         public IEnumerable<Company> GetAll()
@@ -28,7 +33,7 @@ namespace DataAccessLayer.Repositories
         {
             var itemRepo = _companyDbWrapper.Find(t =>
                 t.SiteId.Equals(company.SiteId) && t.CompanyCode.Equals(company.CompanyCode))?.FirstOrDefault();
-            if (itemRepo !=null)
+            if (itemRepo != null)
             {
                 itemRepo.CompanyName = company.CompanyName;
                 itemRepo.AddressLine1 = company.AddressLine1;
